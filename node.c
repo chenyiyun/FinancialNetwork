@@ -16,7 +16,7 @@
 
 Node ori_graph;
 
-/*-------------------5/18³É¹¦Éú³ÉCij²»¶Ô³ÆË«·½Ïò¾ØÕó---------------------*/
+/*-------------------5/18æˆåŠŸç”ŸæˆCijä¸å¯¹ç§°åŒæ–¹å‘çŸ©é˜µ---------------------*/
 double **initial_graph()
 {
 	double **gra;
@@ -31,7 +31,7 @@ double **initial_graph()
 		for(j=0; j<NumNodes; j++)
 			gra[i][j] = 0.0;
 
-	for(i=0; i<NumNodes-1; i++)      //Éú³ÉÉÏÈı½Ç¾ØÕó0,1Ä£°å
+	for(i=0; i<NumNodes-1; i++)      //ç”Ÿæˆä¸Šä¸‰è§’çŸ©é˜µ0,1æ¨¡æ¿
 		for(j=i+1; j<NumNodes; j++)
 			if( check_threshold(CONNECT_PARAM) ){
 			gra[i][j] = 1;
@@ -39,7 +39,7 @@ double **initial_graph()
 			gra[i][j] = 0;
 			}
 
-	for(i=0; i<NumNodes-1; i++)      //°´ÕÕÉÏÈı½Ç¾ØÕó0,1Ä£°åÌî³äÕû¸öC¾ØÕó
+	for(i=0; i<NumNodes-1; i++)      //æŒ‰ç…§ä¸Šä¸‰è§’çŸ©é˜µ0,1æ¨¡æ¿å¡«å……æ•´ä¸ªCçŸ©é˜µ
 		for(j=i+1; j<NumNodes; j++)
 		{
 			if(gra[i][j]==1)
@@ -52,7 +52,7 @@ double **initial_graph()
 }
 
 //done
-void destroy_graph( double **gra )//Çå¿ÕÍøÂç
+void destroy_graph( double **gra )//æ¸…ç©ºç½‘ç»œ
 {
 	int i;
 	for(i=0; i<NumNodes; i++)
@@ -60,8 +60,8 @@ void destroy_graph( double **gra )//Çå¿ÕÍøÂç
 	free(gra);
 }
 
-/*-------------------5/18³É¹¦Ö´ĞĞ²¢´òÓ¡---------------------*/
-void connection_remedy( double **gra )//Á¬Í¨¶È²¹¾È£¬Èç¹û·¢ÏÖÍøÂç²»Á¬Í¨£¬ÓÃ´Ëfunction
+/*-------------------5/18æˆåŠŸæ‰§è¡Œå¹¶æ‰“å°---------------------*/
+void connection_remedy( double **gra )//è¿é€šåº¦è¡¥æ•‘ï¼Œå¦‚æœå‘ç°ç½‘ç»œä¸è¿é€šï¼Œç”¨æ­¤function
 {
 	int i, j, k, m, goon=1;
 	int x[NumNodes],y[NumNodes];
@@ -123,7 +123,7 @@ void connection_remedy( double **gra )//Á¬Í¨¶È²¹¾È£¬Èç¹û·¢ÏÖÍøÂç²»Á¬Í¨£¬ÓÃ´Ëfunc
 }
 
 //done
-void record_graph(double **gra) //½«³õÊ¼ºÃµÄÍøÂçÂ¼ÈëÎÄ¼ş£¬ÊÍ·ÅÄÚ´æ
+void record_graph(double **gra) //å°†åˆå§‹å¥½çš„ç½‘ç»œå½•å…¥æ–‡ä»¶ï¼Œé‡Šæ”¾å†…å­˜
 {
 	FILE *file;
 	int i,j;
@@ -168,7 +168,7 @@ Node newnode()
 }
 
 //done
-Node getNodepointer(Node graphnodes, int id)//¸ù¾İÁ´±íÍ·½áµãgraphnodesÕÒµ½¾ßÌåidµÄ½áµã
+Node getNodepointer(Node graphnodes, int id)//æ ¹æ®é“¾è¡¨å¤´ç»“ç‚¹graphnodesæ‰¾åˆ°å…·ä½“idçš„ç»“ç‚¹
 {
 	Node node;
 	int i;
@@ -183,11 +183,11 @@ Node getNodepointer(Node graphnodes, int id)//¸ù¾İÁ´±íÍ·½áµãgraphnodesÕÒµ½¾ßÌåid
 }
 
 //6.2 done untest
-/*--------------³õÊ¼»¯½ÚµãĞÔÖÊ----------------*/
+/*--------------åˆå§‹åŒ–èŠ‚ç‚¹æ€§è´¨----------------*/
  Node transform_graph(double **gra)
 {
     //srand((unsigned) time(NULL));
-	Node node, retnode, tempnode;//nodeÊÇ»î¶¯×ÅµÄµã£¬retnodeÊÇ¹Ì¶¨µÄÍ·½áµã£¬tempnodeÊÇÁÙÊ±µÄµã
+	Node node, retnode, tempnode;//nodeæ˜¯æ´»åŠ¨ç€çš„ç‚¹ï¼Œretnodeæ˜¯å›ºå®šçš„å¤´ç»“ç‚¹ï¼Œtempnodeæ˜¯ä¸´æ—¶çš„ç‚¹
 	int i,j,k, count;
 	//int t=1;
 	//double sum;
@@ -198,7 +198,7 @@ Node getNodepointer(Node graphnodes, int id)//¸ù¾İÁ´±íÍ·½áµãgraphnodesÕÒµ½¾ßÌåid
     double beta;
 
 
-	//¡¾1¡¿Éú³ÉCrhld¾ØÕó
+	//ã€1ã€‘ç”ŸæˆCrhldçŸ©é˜µ
 	//C=initializeGraph();
     /*
     printf("1. showing the matrix C...\n");
@@ -211,7 +211,7 @@ Node getNodepointer(Node graphnodes, int id)//¸ù¾İÁ´±íÍ·½áµãgraphnodesÕÒµ½¾ßÌåid
     printf("\n");
 	*/
 
-    //¡¾2¡¿Éú³ÉDrhldÏòÁ¿
+    //ã€2ã€‘ç”ŸæˆDrhldå‘é‡
     D=generate_matrixD();
     /*
     printf("2. showing the matrix D...\n");
@@ -222,7 +222,7 @@ Node getNodepointer(Node graphnodes, int id)//¸ù¾İÁ´±íÍ·½áµãgraphnodesÕÒµ½¾ßÌåid
     printf("\n");
     */
 
-    //¡¾3¡¿Éú³ÉbVÕËÃæ¼ÛÖµ
+    //ã€3ã€‘ç”ŸæˆbVè´¦é¢ä»·å€¼
     Matrix_bV(gra,D,bV);
     /*
     printf("6.print bV in main.\n");
@@ -232,15 +232,15 @@ Node getNodepointer(Node graphnodes, int id)//¸ù¾İÁ´±íÍ·½áµãgraphnodesÕÒµ½¾ßÌåid
     }
     */
 
-    //¡¾4¡¿Éú³ÉmVÊĞ³¡¼ÛÖµ
+    //ã€4ã€‘ç”ŸæˆmVå¸‚åœºä»·å€¼
     Matrix_mV(gra,bV,mV);
 
 
-    //¡¾5¡¿½«ÍøÂç×ª»¯³ÉÁ´±í£¬¸øÁ´±íÖĞµÄÃ¿¸ö½áµã¸³Öµ
-	retnode = newnode();//retnode ÊÇÍ·½áµã
-	node = retnode;//Í·½áµãÖ¸ÏòidÎª1µÄµÚÒ»¸ö½áµãnodeµØÖ·
+    //ã€5ã€‘å°†ç½‘ç»œè½¬åŒ–æˆé“¾è¡¨ï¼Œç»™é“¾è¡¨ä¸­çš„æ¯ä¸ªç»“ç‚¹èµ‹å€¼
+	retnode = newnode();//retnode æ˜¯å¤´ç»“ç‚¹
+	node = retnode;//å¤´ç»“ç‚¹æŒ‡å‘idä¸º1çš„ç¬¬ä¸€ä¸ªç»“ç‚¹nodeåœ°å€
 
-    //¡¾6¡¿¸øÍ·½áµã¸³Öµ
+    //ã€6ã€‘ç»™å¤´ç»“ç‚¹èµ‹å€¼
     node->id = 1;
 	//node->Drhld = D[0];
 	/*
@@ -254,7 +254,7 @@ Node getNodepointer(Node graphnodes, int id)//¸ù¾İÁ´±íÍ·½áµãgraphnodesÕÒµ½¾ßÌåid
     node->infln = 0;
     node->beta = 0.0;
 
-    //¡¾7¡¿¸øÁ´±íºóÃæµÄ½áµã ×ÔÓĞĞÔÖÊ ¸³Öµ
+    //ã€7ã€‘ç»™é“¾è¡¨åé¢çš„ç»“ç‚¹ è‡ªæœ‰æ€§è´¨ èµ‹å€¼
 	for(i=2; i<=NumNodes; i++)
 	{
 		tempnode = newnode();
@@ -275,28 +275,28 @@ Node getNodepointer(Node graphnodes, int id)//¸ù¾İÁ´±íÍ·½áµãgraphnodesÕÒµ½¾ßÌåid
 		node = tempnode;
 	}
 
-    //¡¾8¡¿¸øÁ´±íºóÃæµÄ½áµã ÁÚ¾ÓĞÅÏ¢ ¸³Öµ
-	node = retnode;//»Øµ½Á´±íÖĞµÄÍ·½áµã
+    //ã€8ã€‘ç»™é“¾è¡¨åé¢çš„ç»“ç‚¹ é‚»å±…ä¿¡æ¯ èµ‹å€¼
+	node = retnode;//å›åˆ°é“¾è¡¨ä¸­çš„å¤´ç»“ç‚¹
 	for(i=0; i<NumNodes; i++)
 	{	count = 0;
-		for(j=0; j<NumNodes; j++)//±éÀúÃ¿¸ö½ÚµãÓĞ¶àÉÙÁÚ¾Ó£¬ÊıÁ¿Îªcount
+		for(j=0; j<NumNodes; j++)//éå†æ¯ä¸ªèŠ‚ç‚¹æœ‰å¤šå°‘é‚»å±…ï¼Œæ•°é‡ä¸ºcount
 			if(gra[i][j]>0.0)
 				count++;
 		node->numNeib = count;
 
-		//¸ø½á¹¹ÖĞÎå¸öÁÚ¾ÓÊı×é·ÖÅäcount¸ö¿Õ¼ä
-		node->neighbor = (Node*)calloc(count, sizeof(Node));//Node *neighbor,Ö¸ÏòÁÚ¾ÓµÄÖ¸Õë
-		node->neibID = (int*)calloc(count, sizeof(int));//int *neibID£¬ÁÚ¾ÓµÄID
-		node->weight = (double*)calloc(count, sizeof(double));//double *weight,ÓëÃ¿Ò»¸öÁÚ¾ÓµÄ±ßµÄÈ¨ÖØ
-		//node->whereNeibPutMe = (int*)calloc(count, sizeof(int));//int *whereNeibPutMe£¬ÁÚ¾Ó°ÑÎÒ·ÅÔÚÊı×éµÄÄÄÀï
-		node->neibInfln = (int*)calloc(count, sizeof(int));//ÁÚ¾ÓÊÇ·ñ±»´«È¾ÆÆ²ú
+		//ç»™ç»“æ„ä¸­äº”ä¸ªé‚»å±…æ•°ç»„åˆ†é…countä¸ªç©ºé—´
+		node->neighbor = (Node*)calloc(count, sizeof(Node));//Node *neighbor,æŒ‡å‘é‚»å±…çš„æŒ‡é’ˆ
+		node->neibID = (int*)calloc(count, sizeof(int));//int *neibIDï¼Œé‚»å±…çš„ID
+		node->weight = (double*)calloc(count, sizeof(double));//double *weight,ä¸æ¯ä¸€ä¸ªé‚»å±…çš„è¾¹çš„æƒé‡
+		//node->whereNeibPutMe = (int*)calloc(count, sizeof(int));//int *whereNeibPutMeï¼Œé‚»å±…æŠŠæˆ‘æ”¾åœ¨æ•°ç»„çš„å“ªé‡Œ
+		node->neibInfln = (int*)calloc(count, sizeof(int));//é‚»å±…æ˜¯å¦è¢«ä¼ æŸ“ç ´äº§
 
-		//¸øÕâ¼¸¸öÁÚ¾ÓÊı×é¸½ÉÏÏàÓ¦µÄÁÚ¾Ó½ÚµãÖ¸Õë
+		//ç»™è¿™å‡ ä¸ªé‚»å±…æ•°ç»„é™„ä¸Šç›¸åº”çš„é‚»å±…èŠ‚ç‚¹æŒ‡é’ˆ
 		k = 0;
 		for(j=0; j<NumNodes; j++)
 			if(gra[i][j]>0.0)
 			{
-				node->neighbor[k] = getNodepointer(retnode, j+1);//j+1ÊÇÁÚ¾ÓµÄidºÅ£¬×¥È¡Õâ¸öÁÚ¾ÓµÄµØÖ·
+				node->neighbor[k] = getNodepointer(retnode, j+1);//j+1æ˜¯é‚»å±…çš„idå·ï¼ŒæŠ“å–è¿™ä¸ªé‚»å±…çš„åœ°å€
 				node->neibID[k] = j+1;
 				node->weight[k] = gra[i][j];
 				node->neibInfln[k] = 0;
@@ -332,8 +332,15 @@ Node getNodepointer(Node graphnodes, int id)//¸ù¾İÁ´±íÍ·½áµãgraphnodesÕÒµ½¾ßÌåid
 
 	return retnode;
 }
-/*-------²»»áĞ´£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡ÇóÆô·¢£¡£¡£¡£¡£¡£¡£¡£¡£¡----------*/
-//Ò»¸öÖ÷ÌåÊ×´ÎÆÆ²ú£¬¾­ÍøÂç´«²¥ºó£¬×îÖÕÆÆ²ú¸öÌåÊıÁ¿
+/*-------ä¸ä¼šå†™ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼æ±‚å¯å‘ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼----------*/
+//ä¸€ä¸ªä¸»ä½“é¦–æ¬¡ç ´äº§ï¼Œç»ç½‘ç»œä¼ æ’­åï¼Œæœ€ç»ˆç ´äº§ä¸ªä½“æ•°é‡
+
+//possible way:é¦–å…ˆéå†é‚»å±…èŠ‚ç‚¹ï¼Œè®°å½•ä¸‹å—ç ´äº§å½±å“çš„èŠ‚ç‚¹ï¼Œæ”¾å…¥åˆ°æ•°æ®ç»“æ„ä¸­ï¼Œå»ºè®®è€ƒè™‘é˜Ÿåˆ—ï¼ˆå…ˆè¿›å…ˆå‡ºï¼‰
+//æ•°ç»„ä¸å¯è¡Œï¼Œå› ä¸ºæ•°ç»„æ˜¯å›ºå®šå¤§å°ï¼Œé˜Ÿåˆ—å¯èƒ½éœ€è¦è‡ªå·±å®ç°ï¼Œå¯ä»¥å‚ç…§https://gist.github.com/mycodeschool/7510222
+//ç„¶åwhileå¾ªç¯ï¼Œæ•°ç»„ä¸ç©ºçš„æƒ…å†µä¸‹å–å‡ºé˜Ÿåˆ—å½“ä¸­ç¬¬ä¸€ä¸ªï¼Œéå†neighbor
+//æ‰¾å‡ºå—åˆ°å½±å“çš„èŠ‚ç‚¹ï¼Œæ”¾å…¥é˜Ÿåˆ—å½“ä¸­ã€‚åœ¨ç¢°åˆ°å·²ç»ç ´äº§çš„èŠ‚ç‚¹æ—¶ç›´æ¥è·³è¿‡ï¼Œå¦‚æ­¤å¾ªç¯ç›´åˆ°é˜Ÿåˆ—ä¸ºç©ºï¼Œæ„å‘³ç€æ‰€æœ‰èŠ‚ç‚¹éƒ½å·²ç»è¢«å¤„ç†è¿‡
+//å¦‚æ­¤å¯ä»¥å¾—åˆ°æœ‰å¤šå°‘ä¸ªèŠ‚ç‚¹ä¼šå—åˆ°å½±å“ã€‚
+//ä¸å»ºè®®ç”¨é€’å½’ï¼Œè¿™ä¸ªé€’å½’å±‚æ•°å¤ªæ·±ï¼Œè€Œä¸”å¾ˆå®¹æ˜“å‡ºç°å†…å­˜ä¸å¤Ÿçš„é—®é¢˜ï¼Œç»ˆæ­¢æ¡ä»¶ä¸æ˜æ˜¾ï¼Œè¾ƒéš¾ç†è§£ã€‚
 void influenceObyO(Node graphnodes,int No_Fail[NumNodes])
 {
     Node infln_node, neib_node;
@@ -345,23 +352,23 @@ void influenceObyO(Node graphnodes,int No_Fail[NumNodes])
     {
 
         count=0;
-        infln_node = getNodepointer(graphnodes,i+1);//ÕÒµ½Ê×´ÎÆÆ²úµÄÖ÷Ìå½áµã
-        infln_node->infln = 1;//±ê¼ÇÊ×¸öÆÆ²ú½ÚµãµÄ×´Ì¬Îª¡°1¡±
+        infln_node = getNodepointer(graphnodes,i+1);//æ‰¾åˆ°é¦–æ¬¡ç ´äº§çš„ä¸»ä½“ç»“ç‚¹
+        infln_node->infln = 1;//æ ‡è®°é¦–ä¸ªç ´äº§èŠ‚ç‚¹çš„çŠ¶æ€ä¸ºâ€œ1â€
         count++;
-        infln_node->beta = (infln_node->mV)*(1-ThrHld);//¼ÆËãÆÆ²ú³É±¾
-        infln_node->mV *= ThrHld;//ÆÆ²úºóÖ÷ÌåµÄÊĞ³¡¼ÛÖµ
+        infln_node->beta = (infln_node->mV)*(1-ThrHld);//è®¡ç®—ç ´äº§æˆæœ¬
+        infln_node->mV *= ThrHld;//ç ´äº§åä¸»ä½“çš„å¸‚åœºä»·å€¼
 
-        for(j=0;j<infln_node->numNeib;j++)//¶Ô×éÖ¯iµÄ¼¸¸öÁÚ¾Ó½øĞĞ´«È¾ÅĞ¶Ï
+        for(j=0;j<infln_node->numNeib;j++)//å¯¹ç»„ç»‡içš„å‡ ä¸ªé‚»å±…è¿›è¡Œä¼ æŸ“åˆ¤æ–­
         {
-            neib_node = infln_node->neighbor[j];//±äÁ¿neib_node¶¨Î»µ½µÚÒ»¸öÁÚ¾Ó
-            infln_node->neibInfln[j]=test_infln(neib_node,infln_node,j);//Çó³ö¸ÃÁÚ¾ÓÊÇ·ñÆÆ²ú£¬µ÷ÓÃtestº¯Êı
+            neib_node = infln_node->neighbor[j];//å˜é‡neib_nodeå®šä½åˆ°ç¬¬ä¸€ä¸ªé‚»å±…
+            infln_node->neibInfln[j]=test_infln(neib_node,infln_node,j);//æ±‚å‡ºè¯¥é‚»å±…æ˜¯å¦ç ´äº§ï¼Œè°ƒç”¨testå‡½æ•°
             if(infln_node->neibInfln[j]==1)
             {
                 count++;
-                infln_node1 = getNodepointer(graphnodes,j+1);//ÕÒµ½Ê×´ÎÆÆ²úµÄÖ÷Ìå½áµã
-                infln_node1->infln = 1;//±ê¼ÇÊ×¸öÆÆ²ú½ÚµãµÄ×´Ì¬Îª¡°1¡±
-                infln_node1->beta = (infln_node->mV)*(1-ThrHld);//¼ÆËãÆÆ²ú³É±¾
-                infln_node1->mV *= ThrHld;//ÆÆ²úºóÖ÷ÌåµÄÊĞ³¡¼ÛÖµ
+                infln_node1 = getNodepointer(graphnodes,j+1);//æ‰¾åˆ°é¦–æ¬¡ç ´äº§çš„ä¸»ä½“ç»“ç‚¹
+                infln_node1->infln = 1;//æ ‡è®°é¦–ä¸ªç ´äº§èŠ‚ç‚¹çš„çŠ¶æ€ä¸ºâ€œ1â€
+                infln_node1->beta = (infln_node->mV)*(1-ThrHld);//è®¡ç®—ç ´äº§æˆæœ¬
+                infln_node1->mV *= ThrHld;//ç ´äº§åä¸»ä½“çš„å¸‚åœºä»·å€¼
             }else
             {
                 continue;
@@ -375,7 +382,7 @@ void influenceObyO(Node graphnodes,int No_Fail[NumNodes])
 
 }
 
-int test_infln(Node neibnode,Node inflnode,int n)//ÅĞ¶Ïinflnode´«È¾¸øËüµÄÁÚ¾Óneibnodeºó£¬·µ»ØÁÚ¾ÓµÄÆÆ²ú×´Ì¬£º0,1£»0Î´ÆÆ²ú£¬1ÆÆ²ú
+int test_infln(Node neibnode,Node inflnode,int n)//åˆ¤æ–­inflnodeä¼ æŸ“ç»™å®ƒçš„é‚»å±…neibnodeåï¼Œè¿”å›é‚»å±…çš„ç ´äº§çŠ¶æ€ï¼š0,1ï¼›0æœªç ´äº§ï¼Œ1ç ´äº§
 {
     double thrhld_value;
 
@@ -392,7 +399,7 @@ void influenceOne(Node graphnodes, int id)
 	Node infln_node, neib_node;
 	int i,j;
 
-	infln_node = getNodepointer(graphnodes, id);//ÕÒµ½Ê×´ÎÆÆ²úµÄÖ÷Ìå½áµã
+	infln_node = getNodepointer(graphnodes, id);//æ‰¾åˆ°é¦–æ¬¡ç ´äº§çš„ä¸»ä½“ç»“ç‚¹
 
 
 	if(infln_node->infln == 1)
@@ -409,11 +416,11 @@ void influenceOne(Node graphnodes, int id)
 	}
 }
 
-//¶à¸öÖ÷ÌåÊ×´ÎÍ¬Ê±ÆÆ²ú£¬ÍøÂç´«²¥¹ı³Ì
+//å¤šä¸ªä¸»ä½“é¦–æ¬¡åŒæ—¶ç ´äº§ï¼Œç½‘ç»œä¼ æ’­è¿‡ç¨‹
 
 
-/*-------------------5/18³É¹¦Ö´ĞĞ²¢´òÓ¡---------------------*/
-//ĞŞ¸ÄÖĞ¡­¡­
+/*-------------------5/18æˆåŠŸæ‰§è¡Œå¹¶æ‰“å°---------------------*/
+//ä¿®æ”¹ä¸­â€¦â€¦
 //double initializeGraph()
 double **initializeGraph()
 {
@@ -460,7 +467,7 @@ int dissim_type = DISSIMTYPE;
 
 
 
-Node newnode()  //ĞÂ½¨½Úµã
+Node newnode()  //æ–°å»ºèŠ‚ç‚¹
 {
 	Node node;
 
@@ -612,7 +619,7 @@ Node copy_graph_nodes(Node graphnodes)
 	return retgraphnodes;
 }
 
-double dissimilarity(int dtype, double **gra, int i, int j) //¶¨ÒåÈ¨ÖØ·½·¨£¬½«È¨ÖØ£¨±ßµÄÊıÁ¿£©×ª»»³É½Úµã¶ÔÁÙ½ÚµãµÄÓ°Ïì×÷ÓÃ
+double dissimilarity(int dtype, double **gra, int i, int j) //å®šä¹‰æƒé‡æ–¹æ³•ï¼Œå°†æƒé‡ï¼ˆè¾¹çš„æ•°é‡ï¼‰è½¬æ¢æˆèŠ‚ç‚¹å¯¹ä¸´èŠ‚ç‚¹çš„å½±å“ä½œç”¨
 {
 	double sum;
 	int k;
