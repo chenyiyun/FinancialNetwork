@@ -1,6 +1,8 @@
 #ifndef MATRIXCALCULATOR_H_INCLUDED
 #define MATRIXCALCULATOR_H_INCLUDED
 #define NumNodes 10
+#define ThrHld  0.1
+
 //extern int invMatrix();
 extern void multiMatrix(double (*a)[NumNodes],double *b,double *ab);
 //extern double *multiMatrix(double (*a)[NumNodes],double *b);

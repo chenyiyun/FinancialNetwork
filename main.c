@@ -10,7 +10,8 @@
 #include "matrixCalculator.h"
 
 #define NumNodes 10
-#define Beta 0.30
+#define ThrHld  0.1
+
 void main()
 {
 

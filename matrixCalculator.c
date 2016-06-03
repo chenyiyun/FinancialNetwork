@@ -7,7 +7,7 @@
 #include "random.h"
 
 #define NumNodes 10
-#define Beta 0.30
+#define ThrHld  0.1
 
 
 
@@ -352,6 +352,7 @@ void Matrix_mV(double **C,double bV[NumNodes],double mV[NumNodes])
 }
 
 //¡¾Î´²âÊÔ¡¿ÇóCµÄÁÚ½Ó¾ØÕóA=C¼â*£¨I-C£©Äæ
+/*
 void Matrix_A(double (*a)[NumNodes],double (*b)[NumNodes],double (*c)[NumNodes])
 {
     printf("   generating the matrix A from C¼â*£¨I-C£©Äæ...");
@@ -371,7 +372,7 @@ void Matrix_A(double (*a)[NumNodes],double (*b)[NumNodes],double (*c)[NumNodes])
     }
 
 }
-
+*/
 
 
 

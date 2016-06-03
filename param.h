@@ -6,7 +6,7 @@
 
 
 // on graph structure
-#define ThrHld    0.05
+#define ThrHld  0.1
 
 #define NumNodes 	10
 #define CONNECT_PARAM	0.02

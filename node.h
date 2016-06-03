@@ -9,12 +9,12 @@ struct NodeType //definition of Structtype Node
 {
 	//***** node characteristics *****//*
 	int id;			  // id of the node
-	double Drhld;         // direct holdings
-    double *Crhld;       // cossholdings,Cij=gra[i][j],j=0-NumNodes-1
-	//double beta;      // 破产成本百分比 beta*mV
-	double bV;        // book value of the node
+	//double Drhld;         // direct holdings
+    //double *Crhld;       // cossholdings,Cij=gra[i][j],j=0-NumNodes-1
+	//double bV;        // book value of the node
 	double mV;        // market value of the node
     int infln;		// 0 or 1, current situation of influence,0没破产；1破产
+    double beta;    //破产成本，beta=mV*（1-ThrHold）
 
 
 	/***** neighbor characteristics *****/

@@ -12,7 +12,7 @@
 #include "matrixCalculator.h"
 
 #define NumNodes 10
-#define Beta 0.30
+#define ThrHld  0.1
 
 Node ori_graph;
 
@@ -148,11 +148,12 @@ Node newnode()
 	node = (Node)malloc(sizeof(*node));
 
 	node->id = 0;
-	node->Drhld = 0.0;
-	node->Crhld = 0.0;
-	node->bV = 0.0;
+	//node->Drhld = 0.0;
+	//node->Crhld = 0.0;
+	//node->bV = 0.0;
 	node->mV = 0.0;
 	node->infln = 0;
+	node->beta = 0.0;
 
 	node->numNeib = 0;
 	node->neighbor = NULL;
@@ -190,10 +191,11 @@ Node getNodepointer(Node graphnodes, int id)//根据链表头结点graphnodes找到具体id
 	int i,j,k, count;
 	//int t=1;
 	//double sum;
-    double **C;
+    //double **C;
     double *D;
     double bV[NumNodes];
     double mV[NumNodes];
+    double beta;
 
 
 	//【1】生成Crhld矩阵
@@ -240,28 +242,34 @@ Node getNodepointer(Node graphnodes, int id)//根据链表头结点graphnodes找到具体id
 
     //【6】给头结点赋值
     node->id = 1;
-	node->Drhld = D[0];
+	//node->Drhld = D[0];
+	/*
 	for(i=0;i<NumNodes;i++)
     {
-        node->Crhld[0][i]=C[0][i];
+        node->Crhld[i]=C[0][i];
     }
-    node->bV = bV[0];
+    */
+    //node->bV = bV[0];
     node->mV = mV[0];
     node->infln = 0;
+    node->beta = 0.0;
 
     //【7】给链表后面的结点 自有性质 赋值
 	for(i=2; i<=NumNodes; i++)
 	{
 		tempnode = newnode();
 		tempnode->id = i;
-		tempnode->Drhld = D[i-1];
+		//tempnode->Drhld = D[i-1];
+		/*
 		for(j=0;j<NumNodes;j++)
         {
-            tempnode->Crhld[i-1][j]=C[i-1][i];
+            tempnode->Crhld[i-1][j]=C[i-1][j];
         }
-		tempnode->bV = bV[i-1];
+        */
+		//tempnode->bV = bV[i-1];
 		tempnode->mV = mV[i-1];
 		tempnode->infln = 0;
+		tempnode->beta = 0.0;
 
 		node->next = tempnode;
 		node = tempnode;
@@ -324,14 +332,69 @@ Node getNodepointer(Node graphnodes, int id)//根据链表头结点graphnodes找到具体id
 
 	return retnode;
 }
+/*-------不会写！！！！！！！！！！！！！！！求启发！！！！！！！！！----------*/
+//一个主体首次破产，经网络传播后，最终破产个体数量
+void influenceObyO(Node graphnodes,int No_Fail[NumNodes])
+{
+    Node infln_node, neib_node;
+    int i,j;
+    int count;
+    int No_Fail[NumNodes];
 
-//一个主体首次破产，网络传播过程
+    for(i=0;i<NumNodes;i++)
+    {
+
+        count=0;
+        infln_node = getNodepointer(graphnodes,i+1);//找到首次破产的主体结点
+        infln_node->infln = 1;//标记首个破产节点的状态为“1”
+        count++;
+        infln_node->beta = (infln_node->mV)*(1-ThrHld);//计算破产成本
+        infln_node->mV *= ThrHld;//破产后主体的市场价值
+
+        for(j=0;j<infln_node->numNeib;j++)//对组织i的几个邻居进行传染判断
+        {
+            neib_node = infln_node->neighbor[j];//变量neib_node定位到第一个邻居
+            infln_node->neibInfln[j]=test_infln(neib_node,infln_node,j);//求出该邻居是否破产，调用test函数
+            if(infln_node->neibInfln[j]==1)
+            {
+                count++;
+                infln_node1 = getNodepointer(graphnodes,j+1);//找到首次破产的主体结点
+                infln_node1->infln = 1;//标记首个破产节点的状态为“1”
+                infln_node1->beta = (infln_node->mV)*(1-ThrHld);//计算破产成本
+                infln_node1->mV *= ThrHld;//破产后主体的市场价值
+            }else
+            {
+                continue;
+            }
+        }
+
+        for(k=0;k<;k++)
+
+    }
+
+
+}
+
+int test_infln(Node neibnode,Node inflnode,int n)//判断inflnode传染给它的邻居neibnode后，返回邻居的破产状态：0,1；0未破产，1破产
+{
+    double thrhld_value;
+
+    thrhld_value = (neibnode->mV)*ThrHld;
+    neibnode->mV -= (inflnode->beta)*(inflnode->weight[n]);
+    if(neibnode->mV < thrhld_value)
+        return 1;
+    else
+        return 0;
+}
+
 void influenceOne(Node graphnodes, int id)
 {
 	Node infln_node, neib_node;
 	int i,j;
 
-	infln_node = getNodepointer(graphnodes, id);
+	infln_node = getNodepointer(graphnodes, id);//找到首次破产的主体结点
+
+
 	if(infln_node->infln == 1)
 		printf("ddnError: Have been influenced!\n");
 	infln_node->infln = 1;
@@ -346,7 +409,7 @@ void influenceOne(Node graphnodes, int id)
 	}
 }
 
-//过个主体首次同时破产，网络传播过程
+//多个主体首次同时破产，网络传播过程
 
 
 /*-------------------5/18成功执行并打印---------------------*/
