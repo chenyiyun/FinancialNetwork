@@ -8,7 +8,7 @@
 // on graph structure
 #define ThrHld  0.1
 
-#define NumNodes 	10
+#define NUMNODES 	10
 #define CONNECT_PARAM	0.02
 
 #define UPPER_WEIGHT	5
