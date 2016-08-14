@@ -11,11 +11,11 @@
 
 
 /*---------【矩阵乘法】5.19已测试成功-----------*/
-void multiMatrix(double (*a)[NUMNODES], double *b, double *ab)
+void multiMatrix(double a[NUMNODES][NUMNODES], double b[NUMNODES][NUMNODES], double ab[NUMNODES][NUMNODES])
 //double *multiMatrix(double (*a)[NUMNODES],double *b)
 {
     printf("5.1. multiplying...\n");
-    int i, j;
+    int i, j,k;
     double temp;
     //double *ab;
     //ab = (double*) calloc( NUMNODES, sizeof(ab));
@@ -25,40 +25,34 @@ void multiMatrix(double (*a)[NUMNODES], double *b, double *ab)
 
     //printf("\n");
 
-
+    int k = 0;
 
     for (i = 0; i < NUMNODES; i++)
     {
-        temp = 0.0;
-        for (j = 0; j < NUMNODES; j++)
-        {
-            //temp+=(*(*(a+i)+j))*(*(b+i));
-            temp += a[i][j] * b[i];
+        for (k = 0; k < NUMNODES; k++) {
+            temp = 0.0;
+            for (j = 0; j < NUMNODES; j++)
+            {
+                //temp+=(*(*(a+i)+j))*(*(b+i));
+                temp += a[i][j] * b[j][k];
+            }
+            ab[i][k] = temp;
         }
-        ab[i] = temp;
         //printf("  %f",ab[i]);
     }
-    printf("5.1. multiply is done.\n");
-
-    printf("5.1. showing the multi of ab...\n");
-
-    for (i = 0; i < NUMNODES; i++)
-    {
-        printf("  %f", ab[i]);
-    }
-    printf("\n");
 
     //return ab;
 }
 
 /*--------【矩阵减法】5.19已测试成功---------=*/
-void subMatrix(double (*a)[NUMNODES], double (*b)[NUMNODES], double (*a_b)[NUMNODES])
+void subMatrix(double b[NUMNODES][NUMNODES], double a_b[NUMNODES][NUMNODES])
 {
     int i, j;
     for (i = 0; i < NUMNODES; i++)
         for (j = 0; j < NUMNODES; j++)
         {
-            a_b[i][j] = a[i][j] - b[i][j];
+            if (i == j) a_b[i][j] = 1 - b[i][j];
+            else a_b[i][j] = 0 - b[i][j];
         }
 
 }
@@ -96,8 +90,7 @@ void transMatrix(double gra[NUMNODES][NUMNODES], double (*b)[NUMNODES])
 }
 /*-----【求C尖（1-矩阵尖）（对角线有值）】5.20已测试成功-----------*/
 //void shpMatrix(double (*a)[NUMNODES],double (*b)[NUMNODES])
-void shpMatrix(double gra[NUMNODES][NUMNODES], double (*b)[NUMNODES])
-{
+void shpMatrix(double gra[NUMNODES][NUMNODES], double b[NUMNODES][NUMNODES]) {
     int i, j;
     int t = 1;
     double *temp;
@@ -248,14 +241,14 @@ void Matrix_bV(double **C, double D[NUMNODES], double bV[NUMNODES])
     double tMatrix[NUMNODES][NUMNODES];//I-C
     double tempMatrix[NUMNODES][NUMNODES];//(I-C)-1
 
-    
+
     for (i = 0; i < NUMNODES; i++)
         for (j = 0; j < NUMNODES; j++)
         {
             if (i == j)
             {
                 I[i][j] = 1.0;
-            } 
+            }
             else
             {
                 I[i][j] = 0.0;
@@ -295,6 +288,15 @@ void Matrix_mV(double gra[NUMNODES][NUMNODES], double bV[NUMNODES], double mV[NU
     //     printf("  %f", mV[i]);
     // }
 
+}
+
+void Matrix_WeightA(double gra[NUMNODES][NUMNODES], double WeightA[NUMNODES][NUMNODES]) {
+    double c_hat[NUMNODES][NUMNODES];
+    double a_b[NUMNODES][NUMNODES];
+    shpMatrix(gra, c_hat);
+    subMatrix(gra, a_b);
+
+    multiMatrix(c_hat,a_b,WeightA);
 }
 
 

@@ -229,12 +229,14 @@ Node **transform_graph()
     int i = 0, j = 0, k = 0;
     double mv_array[NUMNODES];
     double bv_array[NUMNODES];
+    double weightA[NUMNODES][NUMNODES];
     int count = 0;
 
     Node **node_array = (Node **)malloc(NUMNODES * sizeof(Node));
 
     //get Nodes' mv
     Matrix_mV(gra, bv_array, mv_array);
+    Matrix_WeightA(gra,weightA);
 
 
     for (i = 0; i < NUMNODES; i++) {
@@ -261,7 +263,7 @@ Node **transform_graph()
         for (j = 0; j < NUMNODES; j++) {
             if (gra[j][i] != 0) {
                 node->neibIDs[k] = j;
-                node->weightA[k] = gra[j][i];
+                node->weightA[k] = weightA[j][i];
                 node->neibInfln[k]=0;
                 k++;
             }
