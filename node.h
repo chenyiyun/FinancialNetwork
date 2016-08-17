@@ -9,7 +9,8 @@ struct NodeType //definition of Structtype Node
 {
 	//***** node characteristics *****//*
 	int id;			  // id of the node
-	double mV;        // market value of the node
+	double origin_mV;        // original market value of the node
+	double mV;          //current market value of the node
     int infln;		// 0 or 1, current situation of influence,0Ã»ÆÆ²ú£»1ÆÆ²ú
     double beta;    //bankcrupting cost
 

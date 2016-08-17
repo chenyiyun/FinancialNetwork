@@ -236,14 +236,15 @@ Node **transform_graph()
 
     //get Nodes' mv
     Matrix_mV(gra, bv_array, mv_array);
-    Matrix_WeightA(gra,weightA);
+    Matrix_WeightA(gra, weightA);
 
 
     for (i = 0; i < NUMNODES; i++) {
         Node *node = newnode();
-        count=0;
-        k=0;
+        count = 0;
+        k = 0;
         node->id = i;
+        node->origin_mV = mv_array[i];
         node->mV = mv_array[i];
         //iterate through gra matrix to get size of neighbors firstly
         for (j = 0; j < NUMNODES; j++) {
@@ -253,6 +254,7 @@ Node **transform_graph()
                 count++;
             }
         }
+        node->beta = node->mV * (1 - ThrHld);
 
         node->numNeib = count;
         //malloc memory for fixed size of neighbors
@@ -264,7 +266,7 @@ Node **transform_graph()
             if (gra[j][i] != 0) {
                 node->neibIDs[k] = j;
                 node->weightA[k] = weightA[j][i];
-                node->neibInfln[k]=0;
+                node->neibInfln[k] = 0;
                 k++;
             }
         }
