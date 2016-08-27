@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_DEPRECATE 1
-#include<stdio.h>
-#include<math.h>
-//#include <malloc.h>
+
+#include <stdio.h>
+#include <math.h>
 #include <stdlib.h>
 #include "param.h"
 #include "random.h"
@@ -15,7 +15,7 @@ void multiMatrix(double a[NUMNODES][NUMNODES], double b[NUMNODES][NUMNODES], dou
 //double *multiMatrix(double (*a)[NUMNODES],double *b)
 {
     printf("5.1. multiplying...\n");
-    int i, j,k;
+    int i, j, k;
     double temp;
     //double *ab;
     //ab = (double*) calloc( NUMNODES, sizeof(ab));
@@ -25,7 +25,7 @@ void multiMatrix(double a[NUMNODES][NUMNODES], double b[NUMNODES][NUMNODES], dou
 
     //printf("\n");
 
-    int k = 0;
+    k = 0;
 
     for (i = 0; i < NUMNODES; i++)
     {
@@ -233,13 +233,14 @@ void inversematrix(double arcs[NUMNODES][NUMNODES], double invs[NUMNODES][NUMNOD
 
 }
 
-void Matrix_bV(double **C, double D[NUMNODES], double bV[NUMNODES])
+void Matrix_bV(double **C, double D[NUMNODES][1], double bV[NUMNODES][1])
 {
-    int i, j;
+    int i, j, k;
     //int t=1;
     double I[NUMNODES][NUMNODES];
     double tMatrix[NUMNODES][NUMNODES];//I-C
     double tempMatrix[NUMNODES][NUMNODES];//(I-C)-1
+    double temp;
 
 
     for (i = 0; i < NUMNODES; i++)
@@ -262,31 +263,42 @@ void Matrix_bV(double **C, double D[NUMNODES], double bV[NUMNODES])
             tMatrix[i][j] = I[i][j] - C[i][j];
         }
     inversematrix(tMatrix, tempMatrix);
-    multiMatrix(tempMatrix, D, bV);
+
+    for (i = 0; i < NUMNODES; i++)
+    {
+        temp = 0.0;
+        for (j = 0; j < NUMNODES; j++)
+        {
+            //temp+=(*(*(a+i)+j))*(*(b+i));
+            temp += tempMatrix[i][j] * bV[j][0];
+        }
+        bV[i][0] = temp;
+        //printf("  %f",ab[i]);
+    }
     printf("\n");
     //return bV;
 
 }
 
-void Matrix_mV(double gra[NUMNODES][NUMNODES], double bV[NUMNODES], double mV[NUMNODES])
+void Matrix_mV(double gra[NUMNODES][NUMNODES], double bV[NUMNODES][1], double mV[NUMNODES][1])
 {
-    int i;
+    int i,j;
     double shpC[NUMNODES][NUMNODES];
+    double temp=0.0;
 
     shpMatrix(gra, shpC);
-    multiMatrix(shpC, bV, mV);
+    for (i = 0; i < NUMNODES; i++)
+    {
+        temp = 0.0;
+        for (j = 0; j < NUMNODES; j++)
+        {
+            //temp+=(*(*(a+i)+j))*(*(b+i));
+            temp += shpC[i][j] * bV[j][0];
+        }
+        mV[i][0] = temp;
+        //printf("  %f",ab[i]);
+    }
 
-    // printf("checking the bV...\n");
-    // for (i = 0; i < NUMNODES; i++)
-    // {
-    //     printf("  %f", bV[i]);
-    // }
-
-    // printf("Showing the mV...\n");
-    // for (i = 0; i < NUMNODES; i++)
-    // {
-    //     printf("  %f", mV[i]);
-    // }
 
 }
 
@@ -296,7 +308,7 @@ void Matrix_WeightA(double gra[NUMNODES][NUMNODES], double WeightA[NUMNODES][NUM
     shpMatrix(gra, c_hat);
     subMatrix(gra, a_b);
 
-    multiMatrix(c_hat,a_b,WeightA);
+    multiMatrix(c_hat, a_b, WeightA);
 }
 
 

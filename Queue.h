@@ -3,8 +3,9 @@
 #include "param.h"
 
 
-int init_queue();
+void init_queue();
 int is_empty();
 void offer(Node *node);
 Node *pop();
 Node *peek();
+int get_size();

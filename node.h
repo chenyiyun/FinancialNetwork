@@ -1,6 +1,14 @@
 #ifndef NODE_H_INCLUDED
 #define NODE_H_INCLUDED
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include "param.h"
+#include "random.h"
+#include "node.h"
+#include "matrixCalculator.h"
+
 
 typedef struct NodeType Node;//declaration of Structtype Node
 typedef struct QueueNode *QNode;//declaration of Queue Node
@@ -26,6 +34,15 @@ struct NodeType //definition of Structtype Node
 
 	Node *next;
 };
+
+
+
+void initial_graph();
+void printmatrix();
+void printGraph(Node **node_array);
+Node *newnode();
+Node **transform_graph();
+
 
 // extern Node ori_graph;
 // extern double **dissim_graph;

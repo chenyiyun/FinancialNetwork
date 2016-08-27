@@ -17,6 +17,6 @@ extern void invermatrix(double arcs[NUMNODES][NUMNODES],double invs[NUMNODES][NU
 //extern double *Matrix_bV(double **C,double *D);
 extern void Matrix_bV(double **C,double D[NUMNODES],double bV[NUMNODES]);
 extern void Matrix_mV(double gra[NUMNODES][NUMNODES],double bV[NUMNODES],double mV[NUMNODES]);
-extern void Matrix_A(double (*a)[NUMNODES],double (*b)[NUMNODES],double (*c)[NUMNODES]);
+extern void Matrix_WeightA(double gra[NUMNODES][NUMNODES], double WeightA[NUMNODES][NUMNODES]);
 
 #endif

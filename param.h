@@ -4,6 +4,12 @@
 
 #define LARGE_NUM  1.0e10
 
+//total amount of funds
+#define TOTAL_FUNDS 10000
+//intial size of population
+#define POPULATION_SIZE 100
+
+#define SUB_POP_SIZE 60
 
 // on graph structure
 #define ThrHld  0.1
