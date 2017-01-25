@@ -9,7 +9,7 @@ int capacity=0;
 void init_queue()
 {
     head=(Node **)malloc(sizeof(Node *)*NUMNODES);
-    capacity=0;
+    capacity=NUMNODES;
     startpoint=0;
     endpoint=0;
 }
@@ -31,6 +31,7 @@ void offer(Node *node)
         }
         free(head);
         head=new_head;
+        capacity=capacity*2;
     }
     int insert_position=endpoint;
     head[insert_position]=node;
@@ -54,4 +55,8 @@ Node *peek()
 int get_size()
 {
     return size;
+}
+
+void free_queue(){
+    free(head);
 }

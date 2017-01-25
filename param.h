@@ -5,20 +5,24 @@
 #define LARGE_NUM  1.0e10
 
 //total amount of funds
-#define TOTAL_FUNDS 10000
+#define TOTAL_FUNDS 147
 //intial size of population
-#define POPULATION_SIZE 100
+#define POPULATION_SIZE 50
 
-#define SUB_POP_SIZE 60
+#define SUB_POP_SIZE 8
 
 // on graph structure
-#define ThrHld  0.1
+#define ThrHld  0.5
+#define Theta  0.3
 
-#define NUMNODES 	10
-#define CONNECT_PARAM	0.02
+#define NUMNODES 50
+#define CONNECT_PARAM	0.3
 
 #define UPPER_WEIGHT	5
 #define LOWER_WEIGHT	1
+
+#define CROSS_RATE 0.9
+#define MUTATION_RATE 0.1
 
 
 // on objective function
@@ -34,22 +38,22 @@
 
 // on solve type
 #define SOLVE_TYPE  1	// 1-7
-						/***
-							1  value greedy
-							2  distance					(SPL with r=1)
-							3  longpath greedy			(MPLR with r=1)
-							4  forest weight greedy		(SPFWR with r=1)
-							5  2+1						(SPL)
-							6  3+1						(MPLR)
-							7  4+1						(SPFWR)
-						***/
+/***
+ 1  value greedy
+ 2  distance					(SPL with r=1)
+ 3  longpath greedy			(MPLR with r=1)
+ 4  forest weight greedy		(SPFWR with r=1)
+ 5  2+1						(SPL)
+ 6  3+1						(MPLR)
+ 7  4+1						(SPFWR)
+ ***/
 
 #define DISSIMTYPE  3   // 1-3
-						/***
-							1  1/x
-							2  sum x / x
-							3  upper-x
-						***/
+/***
+ 1  1/x
+ 2  sum x / x
+ 3  upper-x
+ ***/
 
 #define TOPK  8
 

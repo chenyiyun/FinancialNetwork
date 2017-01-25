@@ -3,6 +3,7 @@
 
 extern double random_uniform(double a, double b);
 extern double generate_weight();
+extern void normalize(double gra[NUMNODES][NUMNODES]);
 extern int check_threshold( double th );
 extern double generate_directHld();
 extern double *generate_matrixD();

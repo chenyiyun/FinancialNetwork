@@ -6,6 +6,6 @@
 #include "node.h"
 
 void single_traverse(Node *initial_node);
-void multiple_traverse(Node **initial_nodes, int *array, int nums);
+int multiple_traverse(Node **initial_nodes, int *array, int nums);
 
 #endif

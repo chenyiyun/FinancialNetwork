@@ -9,3 +9,4 @@ void offer(Node *node);
 Node *pop();
 Node *peek();
 int get_size();
+void free_queue();
