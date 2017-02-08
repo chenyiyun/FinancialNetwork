@@ -133,6 +133,23 @@ int *getFitness(Node **node_array, int **solutions) {
     return fitness;
 }
 
+double *getFitnessStats(int *fitness){
+    double *array=(double *) malloc(sizeof(double) * 2);
+    double max=0;
+    double sum=0;
+    int i=0;
+    for(i=0;i<POPULATION_SIZE;i++){
+        if(fitness[i]>max) max=fitness[i];
+        sum+=fitness[i];
+    }
+
+    array[0]=sum/POPULATION_SIZE;
+    array[1]=max;
+   
+    return array;
+}
+
+
 int *getSumArray(int *fitness) {
     int sum = 0;
     int i = 0;
@@ -225,7 +242,7 @@ void cross(int *chromsome1, int *chromsome2, Node **node_array) {
         //printf("preparing to cross\n");
         //if conditions are satisfies even after the cross, then cross.
         if ((part11 + part22) < TOTAL_FUNDS && (part12 + part21) < TOTAL_FUNDS) {
-            //printf("these two chromosome is actually cross\n");
+            printf("these two chromosome is actually cross\n");
             for (i = startIndex; i < NUMNODES; i++) {
                 int tmp = chromsome1[i];
                 chromsome1[i] = chromsome2[i];

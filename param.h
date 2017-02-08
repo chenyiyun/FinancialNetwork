@@ -21,8 +21,13 @@
 #define UPPER_WEIGHT	5
 #define LOWER_WEIGHT	1
 
-#define CROSS_RATE 0.9
+#define CROSS_RATE 0.6
 #define MUTATION_RATE 0.1
+
+#define k1 1
+#define k2 0.5
+#define k3 1
+#define k4 0.5
 
 
 // on objective function

@@ -5,7 +5,7 @@
 #define LARGE_NUM  1.0e10
 
 //total amount of funds
-#define TOTAL_FUNDS 147
+#define TOTAL_FUNDS 500
 //intial size of population
 #define POPULATION_SIZE 50
 
@@ -21,8 +21,13 @@
 #define UPPER_WEIGHT	5
 #define LOWER_WEIGHT	1
 
-#define CROSS_RATE 0.9
+#define CROSS_RATE 0.6
 #define MUTATION_RATE 0.1
+
+#define k1
+#define k2
+#define k3
+#define k4
 
 
 // on objective function

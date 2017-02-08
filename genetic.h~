@@ -13,7 +13,6 @@ typedef enum
 void sort_node(Node **node_array);
 int** init(Node **node_array);
 int *getFitness(Node **node_array, int **solutions);
-double *getFitnessStats(int *fitness);
 int *getSumArray(int *fitness);
 int **getCouple(int* sum_array, int **solutions);
 void cross(int *chromsome1, int *chromsome2, Node **node_array);

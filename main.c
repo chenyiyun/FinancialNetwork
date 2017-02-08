@@ -14,9 +14,7 @@
 
 int main() {
     
-    //int maxTimes = 0;
     int localmax = 0;
-    //int maxFitness = 0;
     int count=1;
     int* bestsolution = NULL;
     srand((unsigned int)time(NULL));
@@ -33,68 +31,83 @@ int main() {
         int *sum_array = getSumArray(fitness);
         
         int i = 0;
-        //cross
+        //get new generation by two
         srand((unsigned int)time(NULL));
         for (; i < POPULATION_SIZE; i += 2) {
             int **couple = getCouple(sum_array, originGen);
             int *chromosome1 = couple[0];
             int *chromosome2 = couple[1];
-            double dice=rand()%100*1.0/100;
-            if(dice>CROSS_RATE){
-                newGen[i]=chromosome1;
-                newGen[i+1]=chromosome2;
-            }else{
-                cross(chromosome1, chromosome2, node_array);
-                newGen[i] = chromosome1;
-                newGen[i + 1] = chromosome2;
-            }
-            mutation(chromosome1,node_array);
-            mutation(chromosome2,node_array);
             free(couple);
+            newGen[i]=chromosome1;
+            newGen[i+1]=chromosome2;
         }
-
+        
         //free old generation
         for(i=0;i<POPULATION_SIZE;i++){
             free(originGen[i]);           
         }
         free(originGen);
         free(sum_array);
-        //judge if it triggers the terminating condition.
-        int *tmp_fitness = fitness;
-        fitness = getFitness(node_array, newGen);
-        free(tmp_fitness);
+       
+        //get favg and fmax, return array first value is favg, second value is fmax.
+        double *array=getFitnessStats(fitness);
+        double favg=array[0];
+        double fmax=array[1];
+
+        //cross
+        for(i=0;i<POPULATION_SIZE;i+=2){
+            int fitness1=fitness[i];
+            int fitness2=fitness[i+1];
+            int *chromosome1=newGen[i];
+            int *chromosome2=newGen[i+1];
+            int fquote=fitness1>fitness2?fitness1:fitness2;
+            double pc=0.0;
+            if(fquote!=fmax){
+                pc=k1*(fmax-fquote)/(fmax-favg);
+            }else{
+                pc=k3;
+            }
+            double dice=rand()%100*1.0/100;
+            if(dice<=pc){
+                cross(chromosome1, chromosome2, node_array);
+                newGen[i] = chromosome1;
+                newGen[i + 1] = chromosome2;
+            } 
+        }
+        //calculate fitness after cross
+        free(fitness);
+        fitness=getFitness(node_array,newGen);
+        
+        //mutation
+        for(i=0;i<POPULATION_SIZE;i++){
+            double pm=0.0;
+            int f=fitness[i];
+            if(fmax>f){
+                pm=k2*(fmax-f)/(fmax-favg);
+            }else{
+                pm=k3;
+            }
+            double dice=rand()%100*1.0/100;
+            if(dice<=pm){
+                mutation(newGen[i],node_array);
+            }
+        }   
+
+ 
+        //get fitness after mutation
+        free(fitness);
+        fitness=getFitness(node_array,newGen);
         
         localmax=0;
         for (i = 0; i < POPULATION_SIZE; i++) {
             if (localmax < fitness[i]) {
                 localmax = fitness[i];
-                //if(localmax>=maxFitness){
-                    bestsolution = newGen[i];
-                //}
+                bestsolution = newGen[i];
             }
         }
         printf("localmax is %d\n",localmax);
-        //printf("maxFitness is %d\n",maxFitness);
-        //print_solution(bestsolution, node_array);
-        
-        //if (localmax > maxFitness && localmax - maxFitness < 2) {
-        //    maxTimes++;
-        //} else if (localmax < maxFitness && maxFitness - localmax < 2) {
-        //    maxTimes++;
-        //} else if(localmax==maxFitness){
-        //    maxTimes++;
-        //} else {
-        //    maxTimes = 0;
-        //    maxFitness=localmax;
-        //}
-        
-        //if (maxFitness < localmax) {
-        //    maxFitness = localmax;
-        //}
-        //print_solution(bestsolution, node_array);
         originGen=newGen;
         count++;
-        //printf("maxTimes is %d\n",maxTimes);
     }
 
     printf("best solution is below\n");
