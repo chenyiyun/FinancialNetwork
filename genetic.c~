@@ -184,7 +184,7 @@ int **getCouple(int* sum_array, int **solutions) {
         
         if (flags[index] == 1) {continue;}
         else {
-            int * newChromesome=(int *)calloc(NUMNODES,sizeof(int));
+            int * newChromesome=(int *)malloc(sizeof(int) * NUMNODES);
             memcpy(newChromesome,solutions[index],sizeof(int)*NUMNODES);
             couple[count] = newChromesome;
             flags[index] = 1;

@@ -14,15 +14,12 @@ double ddntime;
 
 double generate_weight()
 {
-    //double x, y;
-    //x = rand() % 3;
-    //if (x == 0)
-    //{y = (1 + rand() % 49) * 0.01;}
-    //else
-    //{y = (1 + rand() % 99) * 0.001;}
-    //return y;
-    double y;
-    y=(1+rand()%99)*0.001;
+    double x, y;
+    x = rand() % 3;
+    if (x == 0)
+    {y = (1 + rand() % 49) * 0.01;}
+    else
+    {y = (1 + rand() % 99) * 0.001;}
     return y;
 }
 

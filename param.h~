@@ -5,7 +5,7 @@
 #define LARGE_NUM  1.0e10
 
 //total amount of funds
-#define TOTAL_FUNDS 500
+#define TOTAL_FUNDS 147
 //intial size of population
 #define POPULATION_SIZE 50
 
