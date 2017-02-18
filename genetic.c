@@ -19,104 +19,47 @@ void print_solution(int *solution, Node **node_array) {
 //initialize the chromosomes
 int** init(Node **node_array) {
     int count = 0;
-    int start = 0;
-    int dice = 0;
-    int cur = 0;
-    bool stop = false;
     double remain = TOTAL_FUNDS;
-    //printf("total funds is %f\n",remain);
-    
-    
-    sort_node(node_array);
+
     int **solutions = (int **)malloc(sizeof(int *)*POPULATION_SIZE);
     
-    while (count < POPULATION_SIZE) {
-        start = rand() % NUMNODES;
-        cur = start;
-        int *solution = (int *)calloc(NUMNODES, sizeof(int));
-        int *flag = (int *)calloc(NUMNODES, sizeof(int));
-        
-        //get a solution
-        while (!stop) {
-            
-            int count = 0;
-            
-            while (flag[cur] && count != NUMNODES) {
-                cur = (cur + 1) % NUMNODES;
-                count++;
-            }
-            
-            //no suitable slot to allocate money.
-            if (count == NUMNODES) {
+    while(count<POPULATION_SIZE){
+        int *solution=(int *)malloc(sizeof(int)*NUMNODES);
+        int count2=0;
+        int index=0;
+        while(count2<10){
+            index+=(rand() % (NUMNODES/10));
+            if(index<NUMNODES){
+              Node *node=node_array[index]; 
+              if(node->bailout<=remain){
+                 remain-=node->bailout;
+                 solution[index]=1;
+                 count2++;
+              }
+            }else{
                 break;
             }
-            
-            dice = rand() % 10;
-            //if current bailout is greater than remain, then no suitable slots for all slots after it. mark the flag as 1
-            if (node_array[cur]->bailout > remain) {
-                int i = cur;
-                while (i < NUMNODES) {
-                    flag[i] = 1;
-                    i++;
-                }
-            }
-            //current slot is suitable to allocate
-            else if (node_array[cur]->bailout <= remain) {
-                //dice is greater than five, then allocate money
-                if (dice >= 5) {
-                    remain -= node_array[cur]->bailout;
-                    solution[cur] = 1;
-                    flag[cur] = 1;
-                    if (remain == 0) break;
-                    else {
-                        cur = (cur + 1) % NUMNODES;
-                    }
-                }
-                //dice is less than five, then not allocate money
-                else {
-                    cur = (cur + 1) % NUMNODES;
-                }
-            }
         }
-        // printf("solution %d:\n", count);
-        // print_solution(solution, node_array);
-        solutions[count] = solution;
+        //int index=rand()%NUMNODES;
+        //int *solution=(int *)malloc(sizeof(int)*NUMNODES);
+        //get a solution
+        //while(index<NUMNODES){
+            //int dice=rand()%10;
+            //Node *node=node_array[index];
+            //if(dice>=7 && node->bailout<=remain){
+                //remain-=node->bailout;
+                //solution[index]=1;
+                //if(remain==0) break;
+            //}
+            //index++;
+        //}
+        solutions[count]=solution;
         count++;
-        remain = TOTAL_FUNDS;
-        stop = false;
-        
+        remain=TOTAL_FUNDS;
     }
     
-    return solutions;
-    
+    return solutions;  
 }
-
-
-//sort node according to bailout
-//increasing
-void sort_node(Node **node_array) {
-    
-    int i = 0, j = 0, minIndex = 0;
-    Node *minnode = NULL;
-    
-    //select sort, time complexity(o(n^2))
-    for (i = 0; i < NUMNODES; i++) {
-        minnode = node_array[i];
-        minIndex = i;
-        for (j = i; j < NUMNODES; j++) {
-            if (minnode->bailout > node_array[j]->bailout) {//
-                minnode = node_array[j];
-                minIndex = j;
-            }
-        }
-        
-        //swap two pointer.
-        Node *tmp = node_array[i];
-        node_array[i] = node_array[minIndex];
-        node_array[minIndex] = tmp;
-    }
-}
-
 
 //get fitness of the population
 int *getFitness(Node **node_array, int **solutions) {
@@ -242,7 +185,7 @@ void cross(int *chromsome1, int *chromsome2, Node **node_array) {
         //printf("preparing to cross\n");
         //if conditions are satisfies even after the cross, then cross.
         if ((part11 + part22) < TOTAL_FUNDS && (part12 + part21) < TOTAL_FUNDS) {
-            printf("these two chromosome is actually cross\n");
+            //printf("these two chromosome is actually cross\n");
             for (i = startIndex; i < NUMNODES; i++) {
                 int tmp = chromsome1[i];
                 chromsome1[i] = chromsome2[i];

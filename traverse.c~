@@ -75,7 +75,7 @@ int multiple_traverse(Node **initial_nodes, int *array, int nums)//contagion cau
             neighbor_node->mV = (neighbor_node->mV) - (node->beta) * (node->weightA[i]);
             //printf("the new value is %f,with the beta value is %f\n",neighbor_node->mV,node->beta);
             //if it trigger the condition, mark this node as bankrupt
-            if (neighbor_node->mV <= (BRThrHld * neighbor_node->origin_mV)) {
+            if (neighbor_node->mV <= (ThrHld * neighbor_node->origin_mV)) {
                 neighbor_node->infln = 1;
                 printf("bankrupt in diffusion\n");
                 count++;

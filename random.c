@@ -22,7 +22,7 @@ double generate_weight()
     //{y = (1 + rand() % 99) * 0.001;}
     //return y;
     double y;
-    y=(1+rand()%99)*0.001;
+    y=(1+rand()%99)*0.05;
     return y;
 }
 
@@ -49,10 +49,10 @@ void normalize(double gra[NUMNODES][NUMNODES]){
     }
     
     for(k=0;k<NUMNODES;k++){
-        double salt=rand()*1.0/ RAND_MAX *sum[k];
+        double salt=rand()*1.0/ RAND_MAX *sum[k]*0.5;
         sum[k]+=salt;
     }
-    
+
     for(i=0;i<NUMNODES;i++){
         for(j=0;j<NUMNODES;j++){
             gra[i][j]=gra[i][j]/sum[j];

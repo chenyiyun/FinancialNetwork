@@ -206,7 +206,7 @@ Node **transform_graph()
                 count++;//count the number of the neighbors
             }
         }
-        node->beta = node->origin_mV * (1 - ThrHld);
+        node->beta = node->origin_mV * (1.3 - ThrHld);
         node->bailout = node->origin_mV * Theta;//Theta is the rate of the bailout money the node needs
         node->numNeib = count;
         //malloc memory for fixed size of neighbors

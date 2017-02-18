@@ -7,12 +7,13 @@
 //total amount of funds
 #define TOTAL_FUNDS 500
 //intial size of population
-#define POPULATION_SIZE 50
+#define POPULATION_SIZE 100
 
 #define SUB_POP_SIZE 8
 
 // on graph structure
 #define ThrHld  0.5
+#define BRThrHld 0.85
 #define Theta  0.3
 
 #define NUMNODES 100

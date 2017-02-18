@@ -12,6 +12,15 @@
 #include "traverse.h"
 #include "Queue.h"
 
+
+
+void print_gen(int **gen,Node **node_array){
+    int i=0;
+    for(;i<POPULATION_SIZE;i++){
+        print_solution(gen[i],node_array);
+    }
+}
+
 int main() {
     
     int localmax = 0;
@@ -22,10 +31,12 @@ int main() {
     initial_graph();
     //get node array from the matrix.
     Node **node_array = transform_graph();
+
+    //printGraph(node_array);
     int **originGen = init(node_array);
     //get initial fitness.
     int *fitness = getFitness(node_array, originGen);
-    while (count < 100) {
+    while (count < 1000) {
         printf(" ***** generation %d *****\n",count);
         int **newGen = (int **)malloc(sizeof(int *)*POPULATION_SIZE);
         int *sum_array = getSumArray(fitness);
@@ -48,7 +59,8 @@ int main() {
         }
         free(originGen);
         free(sum_array);
-       
+
+        
         //get favg and fmax, return array first value is favg, second value is fmax.
         double *array=getFitnessStats(fitness);
         double favg=array[0];
@@ -96,6 +108,7 @@ int main() {
  
         //get fitness after mutation
         free(fitness);
+        //print_gen(newGen,node_array);
         fitness=getFitness(node_array,newGen);
         
         localmax=0;
@@ -115,9 +128,11 @@ int main() {
     //int max=localmax > maxFitness? localmax: maxFitness;
     printf("max fitness is %d\n",localmax);
     printf("it used %d genenration\n",count-1);
-    
+ 
     return 0;
 }
+
+
 
 
 
