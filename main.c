@@ -36,8 +36,8 @@ int main() {
     int **originGen = init(node_array);
     //get initial fitness.
     int *fitness = getFitness(node_array, originGen);
-    while (count < 1000) {
-        printf(" ***** generation %d *****\n",count);
+    while (count < GENERATION_NUM) {
+        
         int **newGen = (int **)malloc(sizeof(int *)*POPULATION_SIZE);
         int *sum_array = getSumArray(fitness);
         
@@ -118,7 +118,7 @@ int main() {
                 bestsolution = newGen[i];
             }
         }
-        printf("localmax is %d\n",localmax);
+        printf("%d,%d\n",count,localmax);
         originGen=newGen;
         count++;
     }

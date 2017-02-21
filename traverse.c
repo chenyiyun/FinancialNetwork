@@ -77,7 +77,6 @@ int multiple_traverse(Node **initial_nodes, int *array, int nums)//contagion cau
             //if it trigger the condition, mark this node as bankrupt
             if (neighbor_node->mV <= (BRThrHld * neighbor_node->origin_mV)) {
                 neighbor_node->infln = 1;
-                printf("bankrupt in diffusion\n");
                 count++;
                 //maintain the bankrupt cost, this is the base to influence others
                 if (neighbor_node->mV < 0) {

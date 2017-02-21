@@ -9,6 +9,8 @@
 //intial size of population
 #define POPULATION_SIZE 100
 
+#define GENERATION_NUM 1000
+
 #define SUB_POP_SIZE 8
 
 // on graph structure
