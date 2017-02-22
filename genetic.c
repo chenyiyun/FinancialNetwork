@@ -24,7 +24,7 @@ int** init(Node **node_array) {
     int **solutions = (int **)malloc(sizeof(int *)*POPULATION_SIZE);
     
     while(count<POPULATION_SIZE){
-        int *solution=(int *)malloc(sizeof(int)*NUMNODES);
+        int *solution=(int *)calloc(NUMNODES,sizeof(int));
         int count2=0;
         int index=0;
         while(count2<10){
@@ -40,19 +40,6 @@ int** init(Node **node_array) {
                 break;
             }
         }
-        //int index=rand()%NUMNODES;
-        //int *solution=(int *)malloc(sizeof(int)*NUMNODES);
-        //get a solution
-        //while(index<NUMNODES){
-            //int dice=rand()%10;
-            //Node *node=node_array[index];
-            //if(dice>=7 && node->bailout<=remain){
-                //remain-=node->bailout;
-                //solution[index]=1;
-                //if(remain==0) break;
-            //}
-            //index++;
-        //}
         solutions[count]=solution;
         count++;
         remain=TOTAL_FUNDS;

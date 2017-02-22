@@ -24,15 +24,15 @@ void print_gen(int **gen,Node **node_array){
 int main() {
     
     int localmax = 0;
+    int globalmax=0;
     int count=1;
-    int* bestsolution = NULL;
+    //int* localbestsolution = NULL;
+    //int* globalbestsolution = NULL;
     srand((unsigned int)time(NULL));
     //intialize the gra matrix.
     initial_graph();
     //get node array from the matrix.
     Node **node_array = transform_graph();
-
-    //printGraph(node_array);
     int **originGen = init(node_array);
     //get initial fitness.
     int *fitness = getFitness(node_array, originGen);
@@ -105,29 +105,31 @@ int main() {
             }
         }   
 
- 
         //get fitness after mutation
         free(fitness);
-        //print_gen(newGen,node_array);
         fitness=getFitness(node_array,newGen);
         
         localmax=0;
         for (i = 0; i < POPULATION_SIZE; i++) {
             if (localmax < fitness[i]) {
                 localmax = fitness[i];
-                bestsolution = newGen[i];
+                //localbestsolution = newGen[i];
             }
         }
+        //print_solution(localbestsolution,node_array);
         printf("%d,%d\n",count,localmax);
+        if(localmax>globalmax){
+            globalmax=localmax;
+        }
         originGen=newGen;
         count++;
     }
 
-    printf("best solution is below\n");
-    print_solution(bestsolution, node_array);
+    //printf("best solution is below\n");
+    //print_solution(globalbestsolution, node_array);
     //int max=localmax > maxFitness? localmax: maxFitness;
-    printf("max fitness is %d\n",localmax);
-    printf("it used %d genenration\n",count-1);
+    printf("global max fitness is %d\n",globalmax);
+    printf("it used %d genenration\n",count);
  
     return 0;
 }
