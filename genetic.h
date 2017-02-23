@@ -21,6 +21,9 @@ void mutation(int *chromsome, Node **node_array);
 void print_solution(int *solution, Node **node_array);
 void freeMem(Node **new_node_array);
 void copyMem(Node **new_node_array, Node **node_array);
+int **copy_generation(int **originGen);
+int evolution_adaptive(int *fitness,int **originGen,Node **node_array);
+int evolution(int *fitness,int **originGen,Node **node_array);
 
 
 #endif
