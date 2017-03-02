@@ -308,7 +308,7 @@ int evolution_adaptive(int *fitness,int **originGen,Node **node_array){
             }
         }
         //print_solution(localbestsolution,node_array);
-        printf("%d,%d\n",count,localmax);
+        //printf("%d,%d\n",count,localmax);
         if(localmax>globalmax){
             globalmax=localmax;
         }

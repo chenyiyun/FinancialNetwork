@@ -25,29 +25,26 @@ int main() {
     
    
     int globalmax_adaptive=0;
-    int globalmax=0;
     int **originGen=NULL;
     int *fitness=NULL;
-    int **originGen_adaptive=NULL;
-    int *fitness_adaptive=NULL;
 
-    srand((unsigned int)time(NULL));
+    //srand((unsigned int)time(NULL));
+    /******* first solution: generate a new graph *******/
     //intialize the gra matrix.
-    initial_graph();
+    //initial_graph();
     //get node array from the matrix.
-    Node **node_array = transform_graph();
-    originGen = init(node_array);
-    fitness = getFitness(node_array, originGen);
-    originGen_adaptive=copy_generation(originGen);
-    fitness_adaptive=getFitness(node_array,originGen_adaptive);
-    
-    printf("adaptive algorithm\n");
-    globalmax_adaptive=evolution_adaptive(fitness_adaptive,originGen_adaptive,node_array);
-    printf("normal algorithm\n");
-    globalmax=evolution(fitness,originGen,node_array);
+    //Node **node_array = transform_graph();
+    //printGraph(node_array);
+
+    /******* second solution: read configuration from graph.cfg file ********/
+    Node **node_array=readGraph();
    
+    originGen = init(node_array);
+    fitness=getFitness(node_array,originGen);
+     
+    globalmax_adaptive=evolution_adaptive(fitness,originGen,node_array);
     printf("adaptive global max fitness is %d\n",globalmax_adaptive);
-    printf("global max fitness is %d\n",globalmax); 
+    
     return 0;
 }
 

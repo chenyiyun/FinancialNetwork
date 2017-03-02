@@ -212,7 +212,7 @@ int **copy_generation(int **originGen){
     for(;i<POPULATION_SIZE;i++){
         int *solution=(int *)calloc(NUMNODES,sizeof(int));
         size_t size=NUMNODES*sizeof(int);
-        memcpy(solution,originGen[i],size_t);
+        memcpy(solution,originGen[i],size);
         newGen[i]=solution;
     }
     

@@ -42,5 +42,6 @@ Node *newnode();
 Node **transform_graph();
 void printGraph(Node **node_array);
 void getMatrixA();
+Node** readGraph();
 
 #endif

@@ -1,8 +1,12 @@
+#define _GNU_SOURCE
 #include "node.h"
 #include "param.h"
 #include "random.h"
 #include "matrixCalculator.h"
 #include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define _CRT_SECURE_NO_DEPRECATE 1
 #define RECORD_GRAPH
@@ -44,47 +48,27 @@ void initial_graph()
     normalize(gra);
 }
 
-void printmatrix(double matrix[NUMNODES][NUMNODES])
-{
-    int i = 0;
-    int j = 0;
-    for (i = 0; i < NUMNODES; i++) {
-        for (j = 0; j < NUMNODES; j++) {
-            printf("%f, ", matrix[i][j]);
-        }
-        printf("\n");
-    }
-}
-
-void printmv(double mv_array[NUMNODES]) {
-    int i = 0;
-    
-    for (i = 0; i < NUMNODES; i++) {
-        printf("%f, ", mv_array[i]);
-    }
-    printf("\n");
-    
-}
-
-void printNeighbor(Node *node) {
-    int j = 0;
-    for (j = 0; j < (node->numNeib); j++) {
-        printf("  id  %d", (node->neighbors[j])->id);
-        printf("  this neighbor weight is %f\n", node->weightA[j]);
-       
-    }
-}
-
 void printGraph(Node **node_array)
 {
     int i = 0;
+    int j = 0;
     for (i = 0; i < NUMNODES; i++) {
         Node *node = node_array[i];
-        printf("****************Node id is %d ***************\n", node->id);
-        printf(" beta is %f,", node->beta);
-        printf(" bailout money is %f,", node->bailout);
-        printf(" numNeib is %d\n", node->numNeib);
-        printNeighbor(node);
+        printf("%d\n", node->id);
+        printf("%f\n", node->origin_mV);
+        printf("%f\n", node->mV);
+        printf("%d\n", node->infln);
+        printf("%f\n", node->beta);
+        printf("%f\n", node->bailout);
+        printf("%d\n", node->numNeib);
+        for(j=0;j<node->numNeib-1;j++){
+            printf("%d,",node->neibIDs[j]);
+        }
+        printf("%d\n",node->neibIDs[j]);
+        for(j=0;j<node->numNeib-1;j++){
+            printf("%f,",node->weightA[j]); 
+        }
+        printf("%f\n",node->weightA[j]);
     }
 }
 
@@ -200,13 +184,14 @@ Node **transform_graph()
         node->id = i;
         node->origin_mV = mv_array[i];
         node->mV = mv_array[i];
+        node->infln=0;
         //iterate through gra matrix to get size of neighbors firstly
         for (j = 0; j < NUMNODES; j++) {
             if (gra[j][i] != 0) {
                 count++;//count the number of the neighbors
             }
         }
-        node->beta = node->origin_mV * (1.3 - ThrHld);
+        node->beta = node->origin_mV * (1 - ThrHld);
         node->bailout = node->origin_mV * Theta;//Theta is the rate of the bailout money the node needs
         node->numNeib = count;
         //malloc memory for fixed size of neighbors
@@ -238,4 +223,70 @@ Node **transform_graph()
     }
     
     return node_array;
+}
+
+Node** readGraph(){
+    FILE *fp;
+    char *line=NULL;
+    size_t len=0;
+    int i=0;
+    int j=0;
+    const char s[2]=",";
+    Node **node_array = (Node **)malloc(NUMNODES * sizeof(Node *));
+    
+    fp=fopen("graph.cfg","r");
+    if(fp==NULL) exit(EXIT_FAILURE);
+
+    for(i=0;i<NUMNODES;i++){
+        Node *node = (Node *)malloc(sizeof(Node));
+        //get id
+        getline(&line, &len, fp);
+        node->id=atoi(line);
+        //get originmv
+        getline(&line,&len,fp);
+        node->origin_mV=atof(line);
+        //get mv
+        getline(&line,&len,fp);
+        node->mV=atof(line);
+        //get infln
+        getline(&line,&len,fp);
+        node->infln=0;
+        //get beta
+        getline(&line,&len,fp);
+        node->beta=atof(line);
+        //get bailout
+        getline(&line,&len,fp);
+        node->bailout=atof(line);
+        //get numNeib
+        getline(&line, &len, fp);
+        node->numNeib=atoi(line);
+        //get neibIDs
+        node->neibIDs = (int *)malloc(node->numNeib * sizeof(int));
+        getline(&line,&len,fp);
+        node->neibIDs[0]=atoi(strtok(line,s));
+        for(j=1;j<node->numNeib;j++){
+           node->neibIDs[j]=atoi(strtok(NULL,s));
+        }
+        //get weightA   
+        node->weightA = (double *)malloc(node->numNeib * sizeof(double));
+        getline(&line,&len,fp);
+        node->weightA[0]=atof(strtok(line,s));
+        for(j=1;j<node->numNeib;j++){
+           node->weightA[j]=atof(strtok(NULL,s));
+        }
+        node_array[i]=node;
+    }
+
+    //give value to **neighbors field
+    for (i = 0; i < NUMNODES; i++) {
+        Node *node = node_array[i];
+        node->neighbors = (Node **)malloc((node->numNeib) * sizeof(Node *));   
+        for(j=0; j<node->numNeib;j++){
+            node->neighbors[j]=node_array[node->neibIDs[j]];
+        }
+    }
+
+    fclose(fp);
+    if(line) free(line);
+    return NULL;
 }
