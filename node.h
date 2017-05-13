@@ -1,3 +1,6 @@
+/*@Author: Xiaowei Li*/
+/*@Copyright belong to Xiaowei Li and Yiyun Chen*/
+
 #ifndef NODE_H_INCLUDED
 #define NODE_H_INCLUDED
 

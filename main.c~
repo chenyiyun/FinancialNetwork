@@ -1,3 +1,6 @@
+/*@Author: Xiaowei Li*/
+/*@Copyright belong to Xiaowei Li and Yiyun Chen*/
+
 #define S_GA
 #define S_HG
 
@@ -11,7 +14,6 @@
 #include "matrixCalculator.h"
 #include "traverse.h"
 #include "Queue.h"
-
 
 
 void print_gen(int **gen,Node **node_array){
@@ -39,6 +41,7 @@ int main() {
     
     /******* second solution: read configuration from graph.cfg file ********/
     Node **node_array=readGraph();
+    printf("read graph is done\n");
    
     originGen = init(node_array);
     fitness=getFitness(node_array,originGen);

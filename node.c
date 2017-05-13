@@ -1,3 +1,6 @@
+/*@Author: Xiaowei Li*/
+/*@Copyright belong to Xiaowei Li and Yiyun Chen*/
+
 #define _GNU_SOURCE
 #include "node.h"
 #include "param.h"

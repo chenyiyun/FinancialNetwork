@@ -1,3 +1,6 @@
+/*@Author: Xiaowei Li*/
+/*@Copyright belong to Xiaowei Li and Yiyun Chen*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

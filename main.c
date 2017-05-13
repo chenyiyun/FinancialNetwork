@@ -1,3 +1,6 @@
+/*@Author: Xiaowei Li - davidleeofuibe@gmail.com */
+/*@Copyright belong to Xiaowei Li and Yiyun Chen*/
+
 #define S_GA
 #define S_HG
 
@@ -11,7 +14,6 @@
 #include "matrixCalculator.h"
 #include "traverse.h"
 #include "Queue.h"
-
 
 
 void print_gen(int **gen,Node **node_array){

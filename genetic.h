@@ -1,3 +1,6 @@
+/*@Author: Xiaowei Li*/
+/*@Copyright belong to Xiaowei Li and Yiyun Chen*/
+
 #ifndef GENETIC_H_INCLUDED
 #define GENETIC_H_INCLUDED
 

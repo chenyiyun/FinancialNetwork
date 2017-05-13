@@ -1,6 +1,3 @@
-/*@Author: Xiaowei Li*/
-/*@Copyright belong to Xiaowei Li and Yiyun Chen*/
-
 #define _CRT_SECURE_NO_DEPRECATE 1
 
 #include <stdio.h>
