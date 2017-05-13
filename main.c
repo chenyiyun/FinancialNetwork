@@ -35,9 +35,11 @@ int main() {
     //get node array from the matrix.
     //Node **node_array = transform_graph();
     //printGraph(node_array);
-
+     
+    
     /******* second solution: read configuration from graph.cfg file ********/
     Node **node_array=readGraph();
+    printf("read graph is done\n");
    
     originGen = init(node_array);
     fitness=getFitness(node_array,originGen);

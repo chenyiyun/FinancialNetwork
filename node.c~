@@ -288,5 +288,5 @@ Node** readGraph(){
 
     fclose(fp);
     if(line) free(line);
-    return NULL;
+    return node_array;
 }
